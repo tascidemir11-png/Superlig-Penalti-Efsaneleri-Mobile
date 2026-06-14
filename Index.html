@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SüperLig Penaltı Efsaneleri</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(#1b5e20,#43a047);
+    color:white;
+    text-align:center;
+}
+
+#menu, #game{
+    padding:20px;
+}
+
+button{
+    font-size:20px;
+    padding:12px 20px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+}
+
+#top{
+    font-size:50px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="menu">
+    <h1>⚽ SüperLig Penaltı Efsaneleri</h1>
+    <p>🏆 Başlamak için tıkla</p>
+    <button onclick="startGame()">OYNA</button>
+</div>
+
+<div id="game" style="display:none;">
+    <h2>Seviye: <span id="level">1</span></h2>
+    <h2>Gol: <span id="gol">0</span> / <span id="target">5</span></h2>
+
+    <div id="top">⚽</div>
+
+    <button onclick="shot('sol')">Sol</button>
+    <button onclick="shot('orta')">Orta</button>
+    <button onclick="shot('sag')">Sağ</button>
+
+    <h3 id="msg"></h3>
+</div>
+
+<script>
+let level = 1;
+let gol = 0;
+let target = 5;
+
+function startGame(){
+    document.getElementById("menu").style.display="none";
+    document.getElementById("game").style.display="block";
+}
+
+function shot(user){
+
+    let kaleci = ["sol","orta","sag"][Math.floor(Math.random()*3)];
+
+    if(user !== kaleci){
+        gol++;
+        document.getElementById("msg").innerHTML = "🥅 GOL!";
+    } else {
+        document.getElementById("msg").innerHTML = "🧤 KALECİ KURTARDI!";
+    }
+
+    document.getElementById("gol").innerText = gol;
+
+    if(gol >= target){
+        level++;
+        gol = 0;
+        target += 5;
+
+        document.getElementById("level").innerText = level;
+        document.getElementById("target").innerText = target;
+
+        alert("🏆 SEVİYE GEÇİLDİ!");
+    }
+}
+</script>
+
+</body>
+</html>
